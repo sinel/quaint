@@ -1,0 +1,15 @@
+# Dummy YAML configuration for testing
+#
+key1: value1
+key2: "value1"
+key3: 1
+key4: 1.01
+key5: 1e-10
+key6: [1,2,3]
+key7: False
+key8: ~/destination
+key9:
+    subkey1:
+        subsubkey1: value3
+    1:
+        2: value4
