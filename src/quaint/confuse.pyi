@@ -1,5 +1,5 @@
-from typing import TypeVar, Type, overload, AnyStr, Union
 from os import PathLike
+from typing import AnyStr, Type, TypeVar, Union, overload
 
 T = TypeVar("T")
 Path = Union[AnyStr, PathLike[AnyStr]]

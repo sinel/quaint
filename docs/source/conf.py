@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "quaint"
+project = "quaint2"
 copyright = "2022, Sinan Inel"
 author = "Sinan Inel"
 
@@ -53,7 +53,7 @@ html_theme_options = {
     "extra_navbar": "<p>Made with love for physics and programming.</p>",
 }
 html_logo = "_static/q_logo.png"
-html_title = "quaint"
+html_title = "quaint2"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

@@ -46,14 +46,14 @@ import confuse
         path_type=str,
     ),
 )
-def main(path: str) -> None:
+def run(path: str) -> None:
     """
-    Run quaint with specified configuration.
+    Run quaint2 with specified configuration.
 
     Args:
         path: Path to configuration file.
     """
     print(f"Configuration file path: {path}")
-    config = confuse.Configuration("quaint")
+    config = confuse.Configuration("quaint2")
     config.set_file(path)
     print(config)

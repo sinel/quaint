@@ -30,22 +30,22 @@
 #  ****************************************************************************************
 from click.testing import CliRunner
 
-from quaint import main as main
+from quaint.main import run
 
 
-def test_main_with_invalid_path() -> None:
-    """Unit test for main method."""
+def test_run_with_invalid_path() -> None:
+    """Unit test for run method."""
     runner = CliRunner()
-    result = runner.invoke(main.main, ["dummy.yaml"])  # type: ignore
+    result = runner.invoke(run, ["dummy.yaml"])  # type: ignore
     assert result.exit_code != 0
     assert result.exception is not None
     assert "Error: Invalid value for" in result.output
 
 
-def test_main() -> None:
-    """Unit test for main method."""
+def test_run() -> None:
+    """Unit test for run method."""
     runner = CliRunner()
-    result = runner.invoke(main.main, ["tests/test.yaml"])  # type: ignore
+    result = runner.invoke(run, ["tests/test.yaml"])  # type: ignore
     assert result.exit_code == 0
     assert result.exception is None
     assert "tests/test.yaml" in result.output

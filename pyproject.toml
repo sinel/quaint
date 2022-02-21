@@ -8,7 +8,7 @@ readme = "README.md"
 homepage = "https://github.com/farsimple/quaint"
 
 [tool.poetry.scripts]
-main = "quaint.main:main"
+main = "quaint.main:run"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -31,6 +31,7 @@ xdoctest = "^0.15.10"
 flake8-docstrings = "^1.6.0"
 darglint = "^1.8.1"
 seed-isort-config = "^2.2.0"
+pre-commit = "^2.17.0"
 
 [tool.black]
 line-length = 120
