@@ -29,7 +29,7 @@ jobs:
         # stop the build if there are Python syntax errors or undefined names
         poetry run flake8 src --count --statistics --show-source --select=E9,F63,F7,F82
         # exit-zero treats all errors as warnings
-        poetry run flake8 src --count --statistics --show-source --exit-zero --max-line-length=88
+        poetry run flake8 src --count --statistics --show-source --exit-zero --max-line-length=88 --ignore=D100,D205,D212,D415 --docstring-convention=google
     - name: black
       run: |
         poetry run black src --diff --check
@@ -47,9 +47,8 @@ jobs:
         rm -rf gh-pages
         mkdir gh-pages
         touch gh-pages/.nojekyll
-        cd docs/
         poetry run sphinx-build -b html docs/source docs/build
-        cp -r build/* ../gh-pages/
+        cp -r docs/build/* gh-pages/
     - name: deploy docs
       if: ${{ github.event_name == 'push' }}
       uses: JamesIves/github-pages-deploy-action@v4.2.5
