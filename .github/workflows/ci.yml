@@ -1,0 +1,58 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+    - name: dependencies
+      run: |
+        sudo apt update
+        sudo apt-get install libsdl2-dev
+        poetry install
+    - name: flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        poetry run flake8 src --count --statistics --show-source --select=E9,F63,F7,F82
+        # exit-zero treats all errors as warnings
+        poetry run flake8 src --count --statistics --show-source --exit-zero --max-line-length=88
+    - name: black
+      run: |
+        poetry run black src --diff --check
+    - name: isort
+      run: |
+        poetry run isort src --check-only
+    - name: mypy
+      run: |
+        poetry run mypy src
+    - name: tox
+      run: |
+        poetry run tox
+    - name: build docs
+      run: |
+        rm -rf gh-pages
+        mkdir gh-pages
+        touch gh-pages/.nojekyll
+        cd docs/
+        poetry run sphinx-build -b html docs/source docs/build
+        cp -r build/* ../gh-pages/
+    - name: deploy docs
+      if: ${{ github.event_name == 'push' }}
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      with:
+        branch: gh-pages
+        folder: gh-pages
